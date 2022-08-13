@@ -13,7 +13,7 @@ const App = () => {
 
   const fetchData = async () => {
     try {
-        let response = await fetch('https://sailors-back-end-heroku.herokuapp.com/sailors');
+        let response = await fetch(process.env.REACT_APP_BACK_END);
         let data = await response.json();
         setSailorList(data);
     } catch (error) {
