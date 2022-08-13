@@ -1,5 +1,6 @@
 .sailorListContainer {
-    width: calc(10rem + 30vw);
+    width: 60%;
+    min-width: 8rem;
     margin: 0 auto;
 
     .sailorCard {
@@ -10,8 +11,8 @@
         .deleteSailor {
             height: calc(2rem + 2vw);
             width: calc(2rem + 2vw);
-            margin: 0 calc(0.5rem + 0.5vw);
             line-height: calc(2rem + 2vw);
+            margin: 0 calc(0.5rem + 0.5vw);
             color: #e7e7d0;
             text-align: center;
             background: #000510;
@@ -27,14 +28,15 @@
         }
 
         .sailorDetails {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            text-align: center;
             flex-grow: 1;
             background: #e7e7d0;
-            font-size: calc(1rem + 0.5vw);
-            height: calc(2rem + 2vw);
-            line-height: calc(2rem + 2vw);
+            font-size: calc(0.7rem + 0.5vw);
             padding: 0 calc(0.5rem + 0.5vw);
             min-width: calc(5rem + 10vw);
-            text-align: center;
             border-radius: 0.2rem;
         }
     }

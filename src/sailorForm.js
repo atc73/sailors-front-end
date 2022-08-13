@@ -8,11 +8,11 @@ const SailorForm = (props) => {
         <form className={styles.sailorForm} onSubmit={props.handleSubmit}>
             <div className={styles.formSection}>
             <label>Prénom du matelot</label>
-            <input type="text" value={props.sailorToAdd.firstName} onChange={(e) => props.setSailorToAdd({...props.sailorToAdd, firstName: e.target.value})} />
+            <input type="text" maxlength="15" value={props.sailorToAdd.firstName} onChange={(e) => props.setSailorToAdd({...props.sailorToAdd, firstName: e.target.value})} />
             </div>
             <div className={styles.formSection}>
             <label>Nom du matelot</label>
-            <input type="text" value={props.sailorToAdd.lastName} onChange={(e) => props.setSailorToAdd({...props.sailorToAdd, lastName: e.target.value})} />
+            <input type="text" maxlength="15" value={props.sailorToAdd.lastName} onChange={(e) => props.setSailorToAdd({...props.sailorToAdd, lastName: e.target.value})} />
             </div>
             <button>Ajouter un marin</button>
         </form>

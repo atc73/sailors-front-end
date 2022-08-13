@@ -6,7 +6,6 @@ import SailorList from './sailorList';
 const App = () => {
 
   const [sailorList, setSailorList] = useState([])
-  const [isError, setIsError] = useState(false);
   const [sailorToAdd, setSailorToAdd] = useState({
     firstName: '',
     lastName: ''
@@ -14,21 +13,17 @@ const App = () => {
 
   const fetchData = async () => {
     try {
-        let response = await fetch('https://sailors-back-end-heroku.herokuapp.com/sailors');
-        if (response.status === 200) {
-            let data = await response.json();
-            setSailorList(data);
-        } else {
-            throw 'Error fetching users list'
-        }
+        let response = await fetch(process.env.REACT_APP_BACK_END);
+        let data = await response.json();
+        setSailorList(data);
     } catch (error) {
-        setIsError(true)
+        alert(error)
     }
   }
 
 const postData = async () => {
   try {
-    const response = await fetch(`https://sailors-back-end-heroku.herokuapp.com/sailors`, {
+    await fetch(process.env.REACT_APP_BACK_END, {
       method: "post",
       headers: {
         "Content-Type": "application/json"
@@ -37,18 +32,18 @@ const postData = async () => {
     });
     fetchData()
   } catch (error) {
-    throw 'Error fetching users list'
+    alert(error)
   }
 }
 
 const deleteData = async (id) => {
   try {
-    const response = await fetch(`https://sailors-back-end-heroku.herokuapp.com/sailors/${id}`, {
+    await fetch(process.env.REACT_APP_BACK_END +`/${id}`, {
       method: "delete"
     });
     fetchData()
   } catch (error) {
-    throw 'Error fetching users list'
+    alert(error)
   }
 }
   
@@ -73,8 +68,7 @@ const handleDelete = (itemId) => {
   return (
     <div className={styles.appContainer}>
       <SailorForm sailorToAdd={sailorToAdd} setSailorToAdd={setSailorToAdd} handleSubmit={handleSubmit} />
-      {isError ? <h3> Une erreur est survenue. Rechargez la page.</h3> : <SailorList sailorList={sailorList} handleDelete={handleDelete} />
-      }
+      <SailorList sailorList={sailorList} handleDelete={handleDelete} />
     </div>
   );
 }
