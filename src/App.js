@@ -1,23 +1,80 @@
-import logo from './logo.svg';
-import './App.css';
+import {useState, useEffect} from 'react'
+import styles from './App.module.scss';
+import SailorForm from './sailorForm';
+import SailorList from './sailorList';
 
-function App() {
+const App = () => {
+
+  const [sailorList, setSailorList] = useState([])
+  const [isError, setIsError] = useState(false);
+  const [sailorToAdd, setSailorToAdd] = useState({
+    firstName: '',
+    lastName: ''
+  });
+
+  const fetchData = async () => {
+    try {
+        let response = await fetch('https://sailors-back-end-heroku.herokuapp.com/sailors');
+        if (response.status === 200) {
+            let data = await response.json();
+            setSailorList(data);
+        } else {
+            throw 'Error fetching users list'
+        }
+    } catch (error) {
+        setIsError(true)
+    }
+  }
+
+const postData = async () => {
+  try {
+    const response = await fetch(`https://sailors-back-end-heroku.herokuapp.com/sailors`, {
+      method: "post",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(sailorToAdd),
+    });
+    fetchData()
+  } catch (error) {
+    throw 'Error fetching users list'
+  }
+}
+
+const deleteData = async (id) => {
+  try {
+    const response = await fetch(`https://sailors-back-end-heroku.herokuapp.com/sailors/${id}`, {
+      method: "delete"
+    });
+    fetchData()
+  } catch (error) {
+    throw 'Error fetching users list'
+  }
+}
+  
+useEffect(() => {
+  fetchData();
+}, [])
+
+const handleSubmit = (e) => {
+  e.preventDefault()
+  postData()
+  setSailorToAdd({
+    firstName: '',
+    lastName: ''
+  })
+}
+
+const handleDelete = (itemId) => {
+  deleteData(itemId)
+}
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className={styles.appContainer}>
+      <SailorForm sailorToAdd={sailorToAdd} setSailorToAdd={setSailorToAdd} handleSubmit={handleSubmit} />
+      {isError ? <h3> Une erreur est survenue. Rechargez la page.</h3> : <SailorList sailorList={sailorList} handleDelete={handleDelete} />
+      }
     </div>
   );
 }

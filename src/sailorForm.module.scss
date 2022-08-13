@@ -1,0 +1,50 @@
+.sailorFormContainer {
+    background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('https://images.unsplash.com/photo-1467999234657-c053f9433bf2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80');
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    padding: calc(1rem + 1vw) 0;
+    
+    .sailorForm {
+        display: flex;
+        flex-direction: column;
+        width: calc(10rem + 40vw);
+        margin: 0 auto;
+        
+
+        .formSection {
+            display: flex;
+            flex-direction: column;
+
+            label {
+                color: #e7e7d0;
+                font-size: calc(1rem + 0.2vw);
+                padding: calc(0.3rem + 0.3vw);
+            }
+
+            input {
+                background: #e7e7d0;
+                height: calc(1rem + 1vw);
+                padding-left: calc(0.3rem + 0.3vw);
+            }
+        }
+
+        button {
+            background: #598762;
+            color: #e7e7d0;
+            font-size: calc(0.5rem + 0.8vw);
+            padding: calc(1rem + 1vw);
+            width: calc(5rem + 10vw);
+            margin: calc(1rem + 1vw) auto;
+            border-radius: 1rem;
+        }
+
+        button:hover {
+            cursor: pointer;
+        }
+
+        button:active {
+            opacity: 0.3;
+        }
+    }
+}
